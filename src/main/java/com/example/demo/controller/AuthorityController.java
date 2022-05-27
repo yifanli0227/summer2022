@@ -23,10 +23,10 @@ public class AuthorityController {
         return "欢迎来到主页";
     }
 
-    @PostMapping("login")
-    public String login(){
-        return "You are at login.";
-    }
+    // @PostMapping("login")
+    // public String login(){
+    //     return "You are at login.";
+    // }
 
     /**
      * 登录失败的返回值

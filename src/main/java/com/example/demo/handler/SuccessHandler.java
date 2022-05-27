@@ -13,16 +13,16 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 /**
- * @Author 杨不易呀
- * 自定义登录成功的处理器
- * 返回json
+ * @Author Yifan Li
+ * Customized AuthenticationSuccessHandler
+ * reutrn json
  */
 @Configuration
 public class SuccessHandler implements AuthenticationSuccessHandler {
 
 
     /**
-     * 登陆成功后执行的处理器
+     * AuthenticationSuccessHandler
      *
      * @param request
      * @param response

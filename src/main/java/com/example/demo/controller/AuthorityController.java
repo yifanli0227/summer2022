@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 /**
- * @Author 杨不易呀
+ * @Author Yifan Li
  */
 @RestController
 public class AuthorityController {
 
     /**
-     * 登录成功的主页返回值
+     * Login Success
      *
      * @return
      */
@@ -29,7 +29,7 @@ public class AuthorityController {
     // }
 
     /**
-     * 登录失败的返回值
+     * Login failed
      *
      * @return
      */

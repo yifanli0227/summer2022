@@ -28,10 +28,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 
 /**
- * @Author 杨不易呀
- * web 安全的配置类
+ * @Author Yifan Li
+ * Customized Websecurity config
  * <p>
- * WebSecurityConfigurerAdapter   web安全配置的适配器
+ * WebSecurityConfigurerAdapter 
  */
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter 
@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception {
 
         http.exceptionHandling().accessDeniedHandler(deniedHandler);
-        // 给一个表单登陆 就是我们的登录页面,登录成功或者失败后走我们的 url
+
         http.authorizeRequests().anyRequest().authenticated()	
             .and()	
             .formLogin()	

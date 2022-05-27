@@ -7,6 +7,12 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/**
+ * @Author Yifan Li
+ * User Entity retrived from database
+ * 
+ */
+
 public class SysUser implements UserDetails {
  
     private Integer id;

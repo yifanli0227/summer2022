@@ -1,5 +1,11 @@
 package com.example.demo.entity;
 
+/**
+ * @Author Yifan Li
+ * Role Entity retrived from database
+ * 
+ */
+
 public class SysRole {
     private Integer id;
     private String rolename;

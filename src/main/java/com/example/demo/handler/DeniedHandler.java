@@ -15,9 +15,9 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 /**
- * @Author 杨不易呀
- * 自定义登录失败的处理器
- * 返回json
+ * @Author Yifan Li
+ * Customized AccessDeniedHandler
+ * return json
  */
 @Configuration
 public class DeniedHandler implements AccessDeniedHandler {

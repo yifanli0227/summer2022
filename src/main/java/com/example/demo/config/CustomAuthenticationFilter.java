@@ -15,6 +15,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
+/**
+ * @Author Yifan Li
+ * Customized AuthenticationFilter 
+ * <p>
+ * Enables Json login with POST request
+ * {"username":"user","password":"pwd"} 
+ */
+
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {	
     @Override	
     public Authentication attemptAuthentication(HttpServletRequest request, 

@@ -16,7 +16,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service
+/**
+ * @Author Yifan Li
+ * Customized Database Interface
+ * <p>
+ * To retrive user and its roles with given username
+ */
+
+ @Service
 public class JdbcUserDetailsService implements UserDetailsService {
     @Autowired
     private SysRoleMapper sysRoleMapper;
@@ -27,10 +34,10 @@ public class JdbcUserDetailsService implements UserDetailsService {
         // 1. Get user info base on username provided
         SysUser sysUser = sysUserMapper.selectSysUser(s);
         if(sysUser != null ){
-            System.out.println("User found: "+sysUser.toString());
+            // System.out.println("User found: "+sysUser.toString());
             // 2.Get role info based on user id
             List<SysRole> sysRoles = sysRoleMapper.selectSysRoleByUserId(sysUser.getId());
-            System.out.println(sysRoles.toString());
+            // System.out.println(sysRoles.toString());
             List<GrantedAuthority> authorities = new ArrayList<>();
             sysRoles.stream().forEach((e)->{
                 GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+e.getRolename());

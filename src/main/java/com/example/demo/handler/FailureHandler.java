@@ -8,6 +8,7 @@ import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import javax.servlet.ServletException;
@@ -40,15 +41,14 @@ public class FailureHandler implements AuthenticationFailureHandler {
                                         HttpServletResponse response,
                                         AuthenticationException exception
                                         ) throws IOException, ServletException {
-        System.out.println("登录成功了");
+        System.out.println("登录失败了");
         // 把json串写出去
         response.setContentType("application/json;charset=utf-8");
         HashMap<String, Object> map = new HashMap<>(8);
         System.out.println(exception);
         map.put("code", 401);
-        map.put("msg", "登录失败");
         // 把用户信息返回给前端 让前端可以保存起来
-        // map.put("data", exception);
+
         if (exception instanceof LockedException) {
             map.put("msg", "账户被锁定，登陆失败！");
         } else if (exception instanceof BadCredentialsException) {
@@ -59,8 +59,10 @@ public class FailureHandler implements AuthenticationFailureHandler {
             map.put("msg", "账户已过期，登陆失败！");
         } else if (exception instanceof CredentialsExpiredException) {
             map.put("msg", "密码已过期，登陆失败！");
+        } else if (exception instanceof UsernameNotFoundException){
+            map.put("msg", "用户不存在，登陆失败！");
         } else {
-            map.put("msg", "登陆失败！");
+            map.put("msg", "Login Failed"); 
         }
         ObjectMapper objectMapper = new ObjectMapper();
         String s = objectMapper.writeValueAsString(map);

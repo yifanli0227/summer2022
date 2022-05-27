@@ -42,5 +42,6 @@ INSERT INTO sys_role VALUES(2,"USER","mid");
 INSERT INTO sys_role VALUES(3,"READ","low");
 
 INSERT INTO sys_user_role VALUES(1,1);
+INSERT INTO sys_user_role VALUES(1,2);
 INSERT INTO sys_user_role VALUES(2,3);
 INSERT INTO sys_user_role VALUES(3,2);

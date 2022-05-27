@@ -1,7 +1,6 @@
-#
-#
-#mybatis:
-#  mapper-locations: classpath:/mapper/*Mapper.xml
-#  type-aliases-package: com.example.demo.mapper.entity
-#
-w
+
+
+mybatis:
+ mapper-locations: classpath:/mapper/*Mapper.xml
+ type-aliases-package: com.example.demo.mapper.entity
+

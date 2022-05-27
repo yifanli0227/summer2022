@@ -23,6 +23,11 @@ public class AuthorityController {
         return "欢迎来到主页";
     }
 
+    // @PostMapping("login")
+    // public String login(){
+    //     return "You are at login.";
+    // }
+
     /**
      * 登录失败的返回值
      *
@@ -33,41 +38,28 @@ public class AuthorityController {
         return "登录失败了";
     }
 
-        /**
-     * 开启方法权限的注解
+    /**
+     * Access Control
      *
      * @return
      */
-    @GetMapping("add")
+    @GetMapping("admin")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String add() {
-        return "欢迎来到主ADD";
+        return "You have admin access";
     }
 
-    @GetMapping("update")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String update() {
-        return "欢迎来到UPDATE";
-    }
-
-    @GetMapping("delete")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String delete() {
-        return "欢迎来到DELETE";
-    }
-
-    @GetMapping("select")
+    @GetMapping("user")
     @PreAuthorize("hasRole('ROLE_USER')")
-    public String select() {
-        return "欢迎来到SELECT";
+    public String update() {
+        return "You have user access";
     }
 
-    @GetMapping("role")
-    public String role() {
-        return "欢迎来到ROLE";
+    @GetMapping("reader")
+    @PreAuthorize("hasRole('ROLE_READER')")
+    public String delete() {
+        return "You are only reader";
     }
-
-
 }
 
 

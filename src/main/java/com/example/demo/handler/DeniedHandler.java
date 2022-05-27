@@ -25,7 +25,7 @@ public class DeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
             AccessDeniedException exception) throws IOException, ServletException {
-                System.out.println(request + "无权限");
+                System.out.println("无权限");
                 // 把json串写出去
                 response.setContentType("application/json;charset=utf-8");
                 HashMap<String, Object> map = new HashMap<>(8);

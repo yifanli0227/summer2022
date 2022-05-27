@@ -40,8 +40,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     // private SuccessHandler successHandler;
 	// @Autowired
     // private FailureHandler failureHandler;
-    // @Autowired
-    // private DeniedHandler deniedHandler;
+    @Autowired
+    private DeniedHandler deniedHandler;
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        // http.exceptionHandling().accessDeniedHandler(deniedHandler);
+        http.exceptionHandling().accessDeniedHandler(deniedHandler);
         // 给一个表单登陆 就是我们的登录页面,登录成功或者失败后走我们的 url
         http.authorizeRequests().anyRequest().authenticated()	
             .and()	

@@ -43,19 +43,19 @@ public class AuthorityController {
      *
      * @return
      */
-    @GetMapping("admin")
+    @GetMapping("/admin")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String add() {
         return "You have admin access";
     }
 
-    @GetMapping("user")
+    @GetMapping("/user")
     @PreAuthorize("hasRole('ROLE_USER')")
     public String update() {
         return "You have user access";
     }
 
-    @GetMapping("reader")
+    @GetMapping("/reader")
     @PreAuthorize("hasRole('ROLE_READER')")
     public String delete() {
         return "You are only reader";

@@ -1,14 +1,21 @@
 package com.example.demo.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-@Controller
-public class LoginController {
-    @RequestMapping("/ajaxlogin")
-    public String toAjaxHtml(){
-        return "forward:/ajaxlogin.html";
-    } 
+@RestController	
+@ResponseBody	
+public class LoginController {	
+    @GetMapping("/login")	
+    public String login() {	
+        return "尚未登录，请登录";	
+    }	
+    @GetMapping("/hello")	
+    public String hello() {	
+        return "hello";	
+    }	
 }
+
+
+    

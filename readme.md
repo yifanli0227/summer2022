@@ -7,10 +7,13 @@
 
 ## Usage
     Login:
-        Go to localhost:8080 to test login. Credentials can be found in DemoApplication.java
-        After successful login, you should see a message with json object
-        Then go to localhost:8080/index to test user access level
+        Send a POST request with {"username":"youusername","password":"yourpwd"} to localhost:8080/login
+        You should receive a Json object with status code and your authorities.
+    Role Based Access Control(RBAC):
+        demo1 is assigned ADMIN and USER roles, it can access with GET request localhost:8080/admin and /user
+        accessing /reader, which it does not have access to with result a 403 code in json
+        
 
 ## Todo
-    Change login method to ajax for better frontend backend seperation.
-    Create REST API for frontend. 
+    Implements JWT.
+    User registration.

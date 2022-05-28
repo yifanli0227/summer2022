@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.mapper.SysUserMapper">
-    <resultMap id="ResultMap" type="com.example.demo.entity.SysUser">
+<mapper namespace="com.summer2022.mapper.SysUserMapper">
+    <resultMap id="ResultMap" type="com.summer2022.entity.SysUser">
         <id column="id" property="id"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
@@ -15,15 +15,20 @@
     </resultMap>
  
  
+    <insert id="assignRole">
+        insert into sys_user_role(userid,roleid)
+        values (#{userid},#{roleid});
+    </insert>
+
     <insert id="insertSysUser">
         insert  into sys_user(username,password,realname,isenable,islock,iscredentials,isexpired,createtime,logintime)
         values (#{username},#{password},#{realname},#{isEnabled},#{isLocked},#{isCredentials},#{isExpired},#{createTime},#{loginTime});
     </insert>
- 
     <select id="selectSysUser" resultMap="ResultMap" parameterType="java.lang.String">
-        select id,username,password,realname,isexpired,isenable,islock,iscredentials,createtime,logintime from sys_user where username = #{username}
- 
+        select id,username,password,realname,isexpired,isenable,islock,iscredentials,createtime,logintime from sys_user where username = #{username} 
     </select>
+
+
  
 </mapper>
 

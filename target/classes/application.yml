@@ -2,5 +2,5 @@
 
 mybatis:
  mapper-locations: classpath:/mapper/*Mapper.xml
- type-aliases-package: com.example.demo.mapper.entity
+ type-aliases-package: com.javainuse.mapper.entity
 

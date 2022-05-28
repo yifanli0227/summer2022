@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SysUserMapper {
     int insertSysUser(SysUser sysUser);
- 
+    int assignRole(int userid, int roleid);
     SysUser selectSysUser(@Param("username") String username);
 }

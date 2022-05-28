@@ -15,15 +15,20 @@
     </resultMap>
  
  
+    <insert id="assignRole">
+        insert into sys_user_role(userid,roleid)
+        values (#{userid},#{roleid});
+    </insert>
+
     <insert id="insertSysUser">
         insert  into sys_user(username,password,realname,isenable,islock,iscredentials,isexpired,createtime,logintime)
         values (#{username},#{password},#{realname},#{isEnabled},#{isLocked},#{isCredentials},#{isExpired},#{createTime},#{loginTime});
     </insert>
- 
     <select id="selectSysUser" resultMap="ResultMap" parameterType="java.lang.String">
-        select id,username,password,realname,isexpired,isenable,islock,iscredentials,createtime,logintime from sys_user where username = #{username}
- 
+        select id,username,password,realname,isexpired,isenable,islock,iscredentials,createtime,logintime from sys_user where username = #{username} 
     </select>
+
+
  
 </mapper>
 

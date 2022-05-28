@@ -13,7 +13,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -30,7 +29,7 @@ public class JdbcUserDetailsService implements UserDetailsService {
     @Autowired
     private SysUserMapper sysUserMapper;
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String s){
         // 1. Get user info base on username provided
         SysUser sysUser = sysUserMapper.selectSysUser(s);
         if(sysUser != null ){
@@ -46,8 +45,7 @@ public class JdbcUserDetailsService implements UserDetailsService {
             sysUser.setAuthorities(authorities);
             return sysUser;
         }else{
-            throw new 
-            UsernameNotFoundException("User not exist with name: " + s);
+            return null;
         }
     }
 }

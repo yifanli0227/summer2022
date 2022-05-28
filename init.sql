@@ -1,13 +1,9 @@
-
-#CREATE DATABASE demo1;
+DROP DATABASE demo1;
+CREATE DATABASE demo1;
 USE demo1;
 DROP TABLE IF EXISTS `sys_user_role`;
 DROP TABLE IF EXISTS `sys_user`;
 DROP TABLE IF EXISTS `sys_role`;
-
-#DROP DATABASE IF EXISTS 'demo1';
-
-
 
 CREATE TABLE `sys_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -35,13 +31,15 @@ CREATE TABLE `sys_user_role` (
   `roleid` int(11) DEFAULT NULL
 );
 
-
+CREATE TRIGGER newUser
+  AFTER INSERT ON sys_user FOR EACH ROW
+  BEGIN
+    INSERT INTO sys_user_role (userid, roleid)
+    VALUES (NEW.id, 3);  
+  END;
 
 INSERT INTO sys_role VALUES(1,"ADMIN","high");
 INSERT INTO sys_role VALUES(2,"USER","mid");
 INSERT INTO sys_role VALUES(3,"READ","low");
 
 INSERT INTO sys_user_role VALUES(1,1);
-INSERT INTO sys_user_role VALUES(1,2);
-INSERT INTO sys_user_role VALUES(2,3);
-INSERT INTO sys_user_role VALUES(3,2);

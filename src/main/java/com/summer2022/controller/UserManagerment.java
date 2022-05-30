@@ -38,21 +38,22 @@ public class UserManagerment {
         String username = regRequest.getUsername();
         String password = regRequest.getPassword();
         String realname = regRequest.getrealname();
- 
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
-            return JSONResult.fillResultString(406,"Username or Password cnanot be empty!","");
+            JSONResult jsonResult = new JSONResult(406, "Username or Password cnanot be empty!");
+            return jsonResult.toString();
         }
         UserDetails oldUser = userDetailsService.loadUserByUsername(username);
         if (oldUser != null){
-            return JSONResult.fillResultString(400, "Username taken!", "");
+            JSONResult jsonResult = new JSONResult(400, "Username taken!");
+            return jsonResult.toString();
         }else{
             PasswordEncoder encoder = new BCryptPasswordEncoder();
-            System.out.print("reached register final");
-            SysUser sysUser = new SysUser(
+             SysUser sysUser = new SysUser(
                         1,username,encoder.encode(password),realname,
-                        true,true,true,true,curDate,curDate); 
+                        true,true,true,false,curDate,curDate); 
             userMapper.insertSysUser(sysUser);
-            return JSONResult.fillResultString(200, "User Registered", "");
+            JSONResult jsonResult = new JSONResult(200, "User Registered");
+            return jsonResult.toString();
         }
     }  
     
@@ -68,11 +69,13 @@ public class UserManagerment {
         String rolename = roleRequest.getRolename();
 
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(rolename)) {
-            return JSONResult.fillResultString(406,"Username or rolename cannot be empty!","");
-        }
+            JSONResult jsonResult = new JSONResult(406, "Username or rolename cannot be empty!");
+            return jsonResult.toString();
+         }
         UserDetails oldUser = userDetailsService.loadUserByUsername(username);
         if (oldUser == null){
-            return JSONResult.fillResultString(400, "User Not Found!", "");
+            JSONResult jsonResult = new JSONResult(400, "User Not Found!");
+            return jsonResult.toString();
         }else{ 
             SysUser sysUser = sysUserMapper.selectSysUser(username);
             if(rolename.matches("ADMIN")){
@@ -80,8 +83,8 @@ public class UserManagerment {
             }else{
                 userMapper.assignRole(sysUser.getId(), 2);
             }
-
-            return JSONResult.fillResultString(200, "Role(s) assigned!", "");
+            JSONResult jsonResult = new JSONResult(200, "Role(s) assigned!");
+            return jsonResult.toString();
 
         }
     }

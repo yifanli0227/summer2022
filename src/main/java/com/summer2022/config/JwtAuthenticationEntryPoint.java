@@ -1,24 +1,28 @@
 package com.summer2022.config;
 
-import java.io.IOException;
-import java.io.Serializable;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.summer2022.entity.JSONResult;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
+
 @Component
-public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {
+public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
-	private static final long serialVersionUID = -7858869558953243875L;
-
-	@Override
-	public void commence(HttpServletRequest request, HttpServletResponse response,
-			AuthenticationException authException) throws IOException {
-
-		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
-	}
+    @Override
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
+        JSONResult jsonResult = new JSONResult(401, e.getCause().toString(), "Unauthorized");
+        OutputStream out = response.getOutputStream();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(out, jsonResult);
+        out.flush();
+    }
 }

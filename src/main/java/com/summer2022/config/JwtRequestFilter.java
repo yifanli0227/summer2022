@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.summer2022.entity.JSONResult;
 import com.summer2022.service.JdbcUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.SignatureException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -45,6 +47,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 				System.out.println("Unable to get JWT Token");
 			} catch (ExpiredJwtException e) {
 				System.out.println("JWT Token has expired");
+			} catch (SignatureException e){
+				System.out.println("JWT Token Signature Not Vaild");
 			}
 		} else {
 			logger.warn("JWT Token does not begin with Bearer String");
@@ -52,12 +56,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 		//Once we get the token validate it.
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
 			UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
-
 			// if token is valid configure Spring Security to manually set authentication
 			if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
-
 				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
 						userDetails, null, userDetails.getAuthorities());
 				usernamePasswordAuthenticationToken

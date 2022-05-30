@@ -3,6 +3,7 @@ package com.summer2022.controller;
 import java.util.Objects;
 
 import com.summer2022.config.JwtTokenUtil;
+import com.summer2022.entity.JSONResult;
 import com.summer2022.model.JwtRequest;
 import com.summer2022.model.JwtResponse;
 
@@ -34,7 +35,7 @@ public class JwtAuthenticationController {
 	private UserDetailsService jwtInMemoryUserDetailsService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
+	public String createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
 			throws Exception {
 
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -43,8 +44,8 @@ public class JwtAuthenticationController {
 				.loadUserByUsername(authenticationRequest.getUsername());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
-
-		return ResponseEntity.ok(new JwtResponse(token));
+		return JSONResult.fillResultString(200, token, "");
+		// return ResponseEntity.ok(new JwtResponse(token));
 	}
 
 	private void authenticate(String username, String password) throws Exception {

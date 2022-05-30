@@ -45,6 +45,7 @@ public class JdbcUserDetailsService implements UserDetailsService {
             sysUser.setAuthorities(authorities);
             return sysUser;
         }else{
+            System.out.print("user not found");
             return null;
         }
     }

@@ -47,8 +47,7 @@ public class UserManagerment {
             return JSONResult.fillResultString(400, "Username taken!", "");
         }else{
             PasswordEncoder encoder = new BCryptPasswordEncoder();
-            System.out.print("reached register final");
-            SysUser sysUser = new SysUser(
+             SysUser sysUser = new SysUser(
                         1,username,encoder.encode(password),realname,
                         true,true,true,true,curDate,curDate); 
             userMapper.insertSysUser(sysUser);

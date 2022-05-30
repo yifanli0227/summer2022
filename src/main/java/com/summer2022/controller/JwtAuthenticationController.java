@@ -32,7 +32,7 @@ public class JwtAuthenticationController {
 	private JwtTokenUtil jwtTokenUtil;
 
 	@Autowired
-	private UserDetailsService jwtInMemoryUserDetailsService;
+	private UserDetailsService userDetailsService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
@@ -40,11 +40,12 @@ public class JwtAuthenticationController {
 
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-		final UserDetails userDetails = jwtInMemoryUserDetailsService
+		final UserDetails userDetails = userDetailsService
 				.loadUserByUsername(authenticationRequest.getUsername());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
-		return JSONResult.fillResultString(200, token, "");
+		JSONResult jsonResult = new JSONResult(200, token);
+		return jsonResult.toString();
 		// return ResponseEntity.ok(new JwtResponse(token));
 	}
 
@@ -53,7 +54,6 @@ public class JwtAuthenticationController {
 		Objects.requireNonNull(password);
 
 		try {
-			System.out.println("im at auth contrl");
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 		} catch (DisabledException e) {
 			throw new Exception("USER_DISABLED", e);

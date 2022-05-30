@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.summer2022.entity.JSONResult;
 import com.summer2022.service.JdbcUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;

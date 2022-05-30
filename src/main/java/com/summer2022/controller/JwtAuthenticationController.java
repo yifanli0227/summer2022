@@ -5,10 +5,9 @@ import java.util.Objects;
 import com.summer2022.config.JwtTokenUtil;
 import com.summer2022.entity.JSONResult;
 import com.summer2022.model.JwtRequest;
-import com.summer2022.model.JwtResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;

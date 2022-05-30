@@ -19,7 +19,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
-        JSONResult jsonResult = new JSONResult(401, e.getCause().toString(), "Unauthorized");
+        JSONResult jsonResult = new JSONResult(401, e.getMessage(), "Unauthorized");
         OutputStream out = response.getOutputStream();
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(out, jsonResult);
